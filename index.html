@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Một câu hỏi nhỏ 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #ffe1ed, #fff8fc, #ffd4e6);
+    color: #873454;
+}
+
+/* Trái tim bay */
+.hearts {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -40px;
+    color: #ff78a8;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+    15% { opacity: .8; }
+    100% {
+        transform: translateY(-110vh) rotate(40deg);
+        opacity: 0;
+    }
+}
+
+/* Nội dung chính */
+.card {
+    position: relative;
+    z-index: 1;
+    width: min(92%, 520px);
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.tag {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #d16a91;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(24px, 5vw, 35px);
+    color: #a33160;
+    line-height: 1.4;
+    margin: 18px 0 10px;
+}
+
+.sub {
+    color: #b16a86;
+    font-size: 15px;
+    min-height: 22px;
+}
+
+/* Nhân vật xanh */
+.character {
+    width: 160px;
+    height: 140px;
+    margin: 15px auto;
+    animation: bob 2s ease-in-out infinite;
+}
+
+.character svg {
+    width: 160px;
+    height: 140px;
+}
+
+@keyframes bob {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+}
+
+/* Hai nút */
+#yes, #no {
+    position: fixed;
+    z-index: 5;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: left .25s ease, top .25s ease;
+}
+
+#yes {
+    background: #35b957;
+    color: white;
+    box-shadow: 0 5px 0 #218b3d;
+}
+
+#no {
+    background: #ff5968;
+    color: white;
+    box-shadow: 0 5px 0 #d83d4e;
+}
+
+#yes:hover, #no:hover {
+    filter: brightness(1.08);
+}
+
+.hint {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #c18aa0;
+}
+
+/* Thông báo thành công */
+.success {
+    display: none;
+    color: #d83f78;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.7;
+    animation: appear .6s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pháo giấy */
+.confetti {
+    position: fixed;
+    top: -30px;
+    animation: fall 3s linear forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    #yes, #no {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<main class="card">
+
+    <div class="tag">✦ MỘT CÂU HỎI NHỎ ✦</div>
+
+    <h1 id="question">
+        Em có đồng ý đi chơi<br>
+        với anh không? 💗
+    </h1>
+
+    <p class="sub" id="subtitle">
+        Chọn thật lòng nha, anh đang hồi hộp đó!
+    </p>
+
+    <!-- Nhân vật hoạt hình -->
+    <div class="character">
+        <svg viewBox="0 0 160 140">
+            <g stroke="#164d66" stroke-width="2.6"
+               stroke-linejoin="round" stroke-linecap="round">
+
+                <path
+                    d="M35 48 L27 34 L43 39 L45 24
+                    L58 35 L68 20 L78 33 L91 21
+                    L99 37 L114 29 L113 44 L130 42
+                    L121 57 C130 68 132 83 124 98
+                    C117 112 101 117 80 117
+                    C58 117 42 111 35 98
+                    C26 83 29 65 35 48Z"
+                    fill="#31b9dc"/>
+
+                <path d="M39 56 L31 48 L44 49" fill="none"/>
+                <path d="M53 39 L58 31 L64 41" fill="none"/>
+                <path d="M76 35 L81 28 L86 39" fill="none"/>
+                <path d="M100 43 L111 36 L109 49" fill="none"/>
+
+                <path d="M63 65 Q69 57 75 65" fill="none"/>
+                <path d="M85 65 Q91 57 97 65" fill="none"/>
+                <path d="M73 77 Q80 85 87 77" fill="none"/>
+            </g>
+
+            <ellipse cx="48" cy="78" rx="10" ry="5"
+                     fill="#ff799c"/>
+            <ellipse cx="112" cy="78" rx="10" ry="5"
+                     fill="#ff799c"/>
+
+            <path d="M57 108 Q80 121 103 108"
+                  fill="none" stroke="#164d66"
+                  stroke-width="2" opacity=".5"/>
+
+            <text x="8" y="40" font-size="19"
+                  fill="#ff79a9">✦</text>
+            <text x="125" y="27" font-size="21"
+                  fill="#ff79a9">♡</text>
+        </svg>
+    </div>
+
+    <div class="hint" id="hint">
+        Psst… thử bấm “Không” xem sao 👀
+    </div>
+
+    <div class="success" id="success">
+        Yayyyy! 💖<br>
+        Vậy mình có hẹn rồi nhé!
+        <div style="font-size:15px;font-weight:normal">
+            Chúc chúng mình có một ngày thật vui ✨
+        </div>
+    </div>
+
+</main>
+
+<!-- Hai nút luôn nằm trên màn hình -->
+<button id="yes">Có 💚</button>
+<button id="no">Không 🙈</button>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const subtitle = document.getElementById("subtitle");
+
+let count = 0;
+
+/* Đặt hai nút cạnh nhau ở vị trí ban đầu */
+function placeButtons() {
+    const yesWidth = yes.offsetWidth;
+    const noWidth = no.offsetWidth;
+    const gap = 15;
+
+    const totalWidth = yesWidth + noWidth + gap;
+
+    const startX = Math.max(
+        10,
+        (window.innerWidth - totalWidth) / 2
+    );
+
+    const y = Math.min(
+        window.innerHeight - yes.offsetHeight - 25,
+        window.innerHeight * 0.73
+    );
+
+    yes.style.left = startX + "px";
+    yes.style.top = y + "px";
+
+    no.style.left = (startX + yesWidth + gap) + "px";
+    no.style.top = y + "px";
+}
+
+window.addEventListener("load", placeButtons);
+
+window.addEventListener("resize", () => {
+    // Giữ nút Có trong màn hình khi đổi kích thước
+    const maxX = window.innerWidth - yes.offsetWidth - 5;
+    const maxY = window.innerHeight - yes.offsetHeight - 5;
+
+    yes.style.left = Math.max(
+        5, Math.min(parseFloat(yes.style.left) || 5, maxX)
+    ) + "px";
+
+    yes.style.top = Math.max(
+        5, Math.min(parseFloat(yes.style.top) || 5, maxY)
+    ) + "px";
+});
+
+/* Tạo tim bay */
+const hearts = document.getElementById("hearts");
+
+for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+    heart.textContent = ["♡", "♥", "✦"][
+        Math.floor(Math.random() * 3)
+    ];
+
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (6 + Math.random() * 9) + "s";
+    heart.style.animationDelay = (-Math.random() * 12) + "s";
+
+    hearts.appendChild(heart);
+}
+
+/* Bấm KHÔNG: chỉ nút Không di chuyển */
+no.addEventListener("click", function () {
+    count++;
+
+    const messages = [
+        "Ơ kìa, suy nghĩ lại đi mà 🥺",
+        "Nút Có đang chờ em đó 💗",
+        "Bắt được nút Không thì giỏi đó 😝",
+        "Chọn Có đi màaa 💖",
+        "Đừng trốn tránh tình yêu chứ 😳",
+        "Thử bấm lại xem bắt được không 😆"
+    ];
+
+    subtitle.textContent =
+        messages[(count - 1) % messages.length];
+
+    const padding = 8;
+
+    // Phạm vi di chuyển gần như toàn màn hình
+    const maxX = window.innerWidth - no.offsetWidth - padding;
+    const maxY = window.innerHeight - no.offsetHeight - padding;
+
+    let x, y;
+    const oldX = parseFloat(no.style.left) || 0;
+    const oldY = parseFloat(no.style.top) || 0;
+
+    // Ưu tiên vị trí mới cách vị trí cũ đủ xa
+    let attempts = 0;
+
+    do {
+        x = padding + Math.random() * Math.max(0, maxX - padding);
+        y = padding + Math.random() * Math.max(0, maxY - padding);
+        attempts++;
+    } while (
+        Math.abs(x - oldX) < 100 &&
+        Math.abs(y - oldY) < 70 &&
+        attempts < 30
+    );
+
+    no.style.left = x + "px";
+    no.style.top = y + "px";
+});
+
+/* Bấm CÓ: hiện lời chúc */
+yes.addEventListener("click", function () {
+    document.getElementById("question").innerHTML =
+        "Anh biết mà! Em tuyệt nhất 💖";
+
+    subtitle.textContent = "Kèo Valentine đã chốt!";
+
+    yes.style.display = "none";
+    no.style.display = "none";
+
+    document.getElementById("hint").style.display = "none";
+    document.getElementById("success").style.display = "block";
+
+    // Pháo giấy
+    for (let i = 0; i < 100; i++) {
+        const c = document.createElement("span");
+
+        c.className = "confetti";
+        c.textContent = ["♥", "♡", "✦", "💗"][
+            Math.floor(Math.random() * 4)
+        ];
+
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.color = [
+            "#ff477e", "#ff9bba", "#f5bd4f", "#7bcfe0"
+        ][Math.floor(Math.random() * 4)];
+
+        c.style.fontSize = (12 + Math.random() * 20) + "px";
+        c.style.animationDelay = Math.random() * 1.5 + "s";
+
+        document.body.appendChild(c);
+
+        setTimeout(() => c.remove(), 5000);
+    }
+});
+</script>
+
+</body>
+</html>
